@@ -30,19 +30,38 @@
               </el-col>
             </el-row>
           </el-card>
+          <div class="tr mb20">
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="1000">
+            </el-pagination>
+          </div>
         </el-col>
         <el-col :span="6">
           <el-card>
+            <i class="iconfont iconweibo icon" @click="weibo" style="color: #f78585;"></i>
+            <el-popover
+              placement="bottom"
+              width="100"
+              trigger="hover">
+              <img :src="require('@/assets/wechat.png')" style="width: 100%;" alt="wechat" />
+              <i slot="reference" class="iconfont iconwechat-fill icon" style="color: #46af35;"></i>
+            </el-popover>
+            <i class="iconfont iconmail-fill icon" @click="email" style="color: #c52728;"></i>
+            <i class="iconfont icongithub-fill icon" @click="github"></i>
+          </el-card>
+          <el-card class="mt20">
             <div slot="header" class="clearfix">标签</div>
             <el-tag v-for="(item, index) in tags" :key="index" class="mr10 mb5">{{ item.name + '（' + item.count + '）' }}</el-tag>
           </el-card>
           <el-card class="mt20">
             <div slot="header" class="clearfix">友情链接</div>
-              <el-row>
-                <el-col :span="11" :offset="index % 2 === 1 ? 2 : 0" v-for="(item, index) in links" :key="index" class="tc bbl mb10">
-                  <a :href="item.link" target="_blank">{{ item.name }}的博客</a>
-                </el-col>
-              </el-row>
+            <el-row class="link">
+              <el-col :span="11" :offset="index % 2 === 1 ? 2 : 0" v-for="(item, index) in links" :key="index" class="tc bbl mb10">
+                <a :href="item.link" target="_blank">{{ item.name }}的博客</a>
+              </el-col>
+            </el-row>
           </el-card>
           <el-card class="mt20">
             <div slot="header" class="clearfix">归档</div>
@@ -134,6 +153,17 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    weibo () {
+      window.open('https://weibo.com/u/1839302501', '_blank')
+    },
+    email () {
+      window.open('http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=QCMoJS4xKS1wcXBzADExbiMvLQ', '_blank')
+    },
+    github () {
+      window.open('https://www.github.com/chenqim', '_blank')
+    }
   }
 }
 </script>
@@ -157,12 +187,17 @@ i {
   position: relative;
   top: 2px;
 }
-a {
+.link a {
   text-decoration: none;
   color: #fff;
 }
-a:hover {
+.link a:hover {
   transition: 0.5s;
   color: #3f9eff;
+}
+.icon {
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 </style>

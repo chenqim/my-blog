@@ -22,8 +22,16 @@
   padding-top: 80px;
 }
 
+.tl {
+  text-align: left;
+}
+
 .tc {
   text-align: center;
+}
+
+.tr {
+  text-align: right;
 }
 
 .m0 {
