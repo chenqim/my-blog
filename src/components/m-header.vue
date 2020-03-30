@@ -10,9 +10,9 @@
       active-text-color="#ffd04b">
       <el-menu-item class="mr-auto">MMJ's bolg!</el-menu-item>
       <el-menu-item index="1">首页</el-menu-item>
-      <el-menu-item index="2">生活</el-menu-item>
-      <el-menu-item index="3">学习</el-menu-item>
-      <el-menu-item index="4">福利</el-menu-item>
+      <el-menu-item index="2">博客</el-menu-item>
+      <el-menu-item index="3">摄影</el-menu-item>
+      <el-menu-item index="4">工具</el-menu-item>
       <el-menu-item index="5">留言</el-menu-item>
       <el-menu-item index="6">关于</el-menu-item>
       <el-menu-item class="ml-auto" @click="loginDialog" v-if="session === null">
@@ -23,7 +23,7 @@
           <img src="//192.168.7.61/01/1E/wKgHPVwzD2eADkuCAADDMIiODYA851.jpg" class="avatar" />&nbsp;&nbsp;
           {{ session }}
         </template>
-        <el-menu-item>退出登录</el-menu-item>
+        <el-menu-item @click.native="logout">退出登录</el-menu-item>
       </el-submenu>
     </el-menu>
     <el-dialog :visible.sync="modal" width="400px" :label-width="formLabelWidth" append-to-body :close-on-click-modal="false" class="loginDialog">
@@ -94,6 +94,10 @@ export default {
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+      if (key === '1') this.$router.push('/')
+      if (key === '3') this.$router.push('/photo')
+      if (key === '4') this.$router.push('/tool')
+      if (key === '6') this.$router.push('/about')
     },
     loginDialog () {
       this.modal = true
@@ -103,7 +107,8 @@ export default {
     },
     showCode () {
       let that = this
-      var captcha1 = new TencentCaptcha('2084525188', function(res) {
+      // eslint-disable-next-line
+      var captcha1 = new TencentCaptcha('2084525188', function (res) {
         if (res.ret === 0) {
           that.form.isSuccess = 'success'
           that.$refs['form'].validate()
@@ -116,6 +121,7 @@ export default {
         if (valid) {
           if (this.form.username === 'cqm' && this.form.password === '123456') {
             sessionStorage.setItem('username', 'cqm')
+            window.location.reload()
             this.modal = false
             this.$message({
               message: '登录成功！',
@@ -129,7 +135,11 @@ export default {
           this.$message.error('请核对表单字段！')
           return false
         }
-      });
+      })
+    },
+    logout () {
+      sessionStorage.removeItem('username')
+      window.location.reload()
     }
   }
 }

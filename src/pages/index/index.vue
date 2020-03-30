@@ -15,7 +15,7 @@
           <!-- 文章列表 -->
           <el-card v-for="(item, index) in articles" :key="index" class="mb20">
             <el-row>
-              <el-col :span="12"><h3 class="m0">{{ item.title }}</h3></el-col>
+              <el-col :span="12"><h3 class="m0" style="cursor: pointer;" @click="toDetail">{{ item.title }}</h3></el-col>
             </el-row>
             <el-row class="mt20" style="position: relative;">
               <el-col :span="6"><img :src="item.picture" style="width: 100%; height: 140px;" alt=""></el-col>
@@ -155,6 +155,9 @@ export default {
     }
   },
   methods: {
+    toDetail () {
+      this.$router.push('/detail')
+    },
     weibo () {
       window.open('https://weibo.com/u/1839302501', '_blank')
     },
