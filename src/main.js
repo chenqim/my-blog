@@ -6,7 +6,8 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // 自定义公共样式
-import './css/style.css'
+import './css/style.less'
+import './css/style.scss'
 // iconfont 样式
 import './icontfont/iconfont.css'
 

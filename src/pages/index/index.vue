@@ -1,77 +1,75 @@
 <template>
-  <div class="m-container">
-    <div class="m-content">
-      <el-row>
-        <el-card>
-          <el-carousel :interval="5000" type="card" arrow="always">
-            <el-carousel-item v-for="(item, index) in images" :key="index">
-              <img :src="item.src" alt="" style="width: 100%;">
-            </el-carousel-item>
-          </el-carousel>
+  <div>
+    <el-row>
+      <el-card>
+        <el-carousel :interval="5000" type="card" arrow="always">
+          <el-carousel-item v-for="(item, index) in images" :key="index">
+            <img :src="item.src" alt="" style="width: 100%;">
+          </el-carousel-item>
+        </el-carousel>
+      </el-card>
+    </el-row>
+    <el-row :gutter="20" class="mt20">
+      <el-col :span="18">
+        <!-- 文章列表 -->
+        <el-card v-for="(item, index) in articles" :key="index" class="mb20">
+          <el-row>
+            <el-col :span="12"><h3 class="m0" style="cursor: pointer;" @click="toDetail">{{ item.title }}</h3></el-col>
+          </el-row>
+          <el-row class="mt20" style="position: relative;">
+            <el-col :span="6"><img :src="item.picture" style="width: 100%; height: 140px;" alt=""></el-col>
+            <el-col :span="18">
+              <el-row class="ml20 article-content">{{ item.content }}</el-row>
+              <div class="article-tip">
+                <span><i class="iconfont iconuser"></i>作者：{{ item.author }}</span>
+                <span class="ml10"><i class="iconfont icontag"></i>分类：{{ item.tag }}</span>
+                <span class="ml10"><i class="iconfont icontime-circle"></i>发布时间：{{ item.createTime }}</span>
+                <span class="ml10"><i class="iconfont iconeye"></i>浏览量：{{ item.pageview }}</span>
+              </div>
+            </el-col>
+          </el-row>
         </el-card>
-      </el-row>
-      <el-row :gutter="20" class="mt20">
-        <el-col :span="18">
-          <!-- 文章列表 -->
-          <el-card v-for="(item, index) in articles" :key="index" class="mb20">
-            <el-row>
-              <el-col :span="12"><h3 class="m0" style="cursor: pointer;" @click="toDetail">{{ item.title }}</h3></el-col>
-            </el-row>
-            <el-row class="mt20" style="position: relative;">
-              <el-col :span="6"><img :src="item.picture" style="width: 100%; height: 140px;" alt=""></el-col>
-              <el-col :span="18">
-                <el-row class="ml20 article-content">{{ item.content }}</el-row>
-                <div class="article-tip">
-                  <span><i class="iconfont iconuser"></i>作者：{{ item.author }}</span>
-                  <span class="ml10"><i class="iconfont icontag"></i>分类：{{ item.tag }}</span>
-                  <span class="ml10"><i class="iconfont icontime-circle"></i>发布时间：{{ item.createTime }}</span>
-                  <span class="ml10"><i class="iconfont iconeye"></i>浏览量：{{ item.pageview }}</span>
-                </div>
-              </el-col>
-            </el-row>
-          </el-card>
-          <div class="tr mb20">
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              :total="1000">
-            </el-pagination>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <el-card>
-            <i class="iconfont iconweibo icon" @click="weibo" style="color: #f78585;"></i>
-            <el-popover
-              placement="bottom"
-              width="100"
-              trigger="hover">
-              <img :src="require('@/assets/wechat.png')" style="width: 100%;" alt="wechat" />
-              <i slot="reference" class="iconfont iconwechat-fill icon" style="color: #46af35;"></i>
-            </el-popover>
-            <i class="iconfont iconmail-fill icon" @click="email" style="color: #c52728;"></i>
-            <i class="iconfont icongithub-fill icon" @click="github"></i>
-          </el-card>
-          <el-card class="mt20">
-            <div slot="header" class="clearfix">标签</div>
-            <el-tag v-for="(item, index) in tags" :key="index" class="mr10 mb5">{{ item.name + '（' + item.count + '）' }}</el-tag>
-          </el-card>
-          <el-card class="mt20">
-            <div slot="header" class="clearfix">友情链接</div>
-            <el-row class="link">
-              <el-col :span="11" :offset="index % 2 === 1 ? 2 : 0" v-for="(item, index) in links" :key="index" class="tc bbl mb10">
-                <a :href="item.link" target="_blank">{{ item.name }}的博客</a>
-              </el-col>
-            </el-row>
-          </el-card>
-          <el-card class="mt20">
-            <div slot="header" class="clearfix">归档</div>
-            <el-row>
-              <el-col :span="12" v-for="(item, index) in times" :key="index">{{ item.time }}</el-col>
-            </el-row>
-          </el-card>
-        </el-col>
-      </el-row>
-    </div>
+        <div class="tr mb20">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="1000">
+          </el-pagination>
+        </div>
+      </el-col>
+      <el-col :span="6">
+        <el-card>
+          <i class="iconfont iconweibo icon" @click="weibo" style="color: #f78585;"></i>
+          <el-popover
+            placement="bottom"
+            width="100"
+            trigger="hover">
+            <img :src="require('@/assets/wechat.png')" style="width: 100%;" alt="wechat" />
+            <i slot="reference" class="iconfont iconwechat-fill icon" style="color: #46af35;"></i>
+          </el-popover>
+          <i class="iconfont iconmail-fill icon" @click="email" style="color: #c52728;"></i>
+          <i class="iconfont icongithub-fill icon" @click="github"></i>
+        </el-card>
+        <el-card class="mt20">
+          <div slot="header" class="clearfix">标签</div>
+          <el-tag v-for="(item, index) in tags" :key="index" class="mr10 mb5">{{ item.name + '（' + item.count + '）' }}</el-tag>
+        </el-card>
+        <el-card class="mt20">
+          <div slot="header" class="clearfix">友情链接</div>
+          <el-row class="link">
+            <el-col :span="11" :offset="index % 2 === 1 ? 2 : 0" v-for="(item, index) in links" :key="index" class="tc bbl mb10">
+              <a :href="item.link" target="_blank">{{ item.name }}的博客</a>
+            </el-col>
+          </el-row>
+        </el-card>
+        <el-card class="mt20">
+          <div slot="header" class="clearfix">归档</div>
+          <el-row>
+            <el-col :span="12" v-for="(item, index) in times" :key="index">{{ item.time }}</el-col>
+          </el-row>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 

@@ -2,19 +2,19 @@
   <div class="m-header">
     <el-menu
       class="m-flex"
-      :default-active="activeIndex2"
+      :default-active="activeIndex"
       mode="horizontal"
       @select="handleSelect"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-menu-item class="mr-auto">MMJ's bolg!</el-menu-item>
-      <el-menu-item index="1">首页</el-menu-item>
-      <el-menu-item index="2">博客</el-menu-item>
-      <el-menu-item index="3">摄影</el-menu-item>
-      <el-menu-item index="4">工具</el-menu-item>
-      <el-menu-item index="5">留言</el-menu-item>
-      <el-menu-item index="6">关于</el-menu-item>
+      <el-menu-item class="mr-auto">mqc's bolg!</el-menu-item>
+      <el-menu-item index="/">首页</el-menu-item>
+      <!-- <el-menu-item index="2">博客</el-menu-item> -->
+      <el-menu-item index="/photo">摄影</el-menu-item>
+      <el-menu-item index="/tool">工具</el-menu-item>
+      <!-- <el-menu-item index="5">留言</el-menu-item> -->
+      <el-menu-item index="/about">关于</el-menu-item>
       <el-menu-item class="ml-auto" @click="loginDialog" v-if="session === null">
         登录
       </el-menu-item>
@@ -62,7 +62,7 @@ export default {
   name: '',
   data () {
     return {
-      activeIndex2: '1',
+      activeIndex: '',
       modal: false,
       form: {
         username: '',
@@ -90,14 +90,17 @@ export default {
   created () {
     console.log(sessionStorage.getItem('username'))
     this.session = sessionStorage.getItem('username')
+    this.activeIndex = this.$route.path
+    console.log(this.$route.path)
   },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
-      if (key === '1') this.$router.push('/')
-      if (key === '3') this.$router.push('/photo')
-      if (key === '4') this.$router.push('/tool')
-      if (key === '6') this.$router.push('/about')
+      this.$router.push(key)
+      // if (key === '1') this.$router.push('/')
+      // if (key === '3') this.$router.push('/photo')
+      // if (key === '4') this.$router.push('/tool')
+      // if (key === '6') this.$router.push('/about')
     },
     loginDialog () {
       this.modal = true

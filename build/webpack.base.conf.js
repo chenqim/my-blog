@@ -46,11 +46,11 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
-      },
+      // {
+      //   test: /\.js$/,
+      //   loader: 'babel-loader',
+      //   include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+      // },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
@@ -75,10 +75,19 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
-      }
+      // {
+      //   test: /\.less$/i,
+      //   loader: [
+      //     // compiles Less to CSS
+      //     "style-loader",
+      //     "css-loader",
+      //     "less-loader",
+      //   ]
+      // },
+      // {
+      //   test: /\.scss$/,
+      //   loaders: ['style', 'css', 'sass']
+      // }
     ]
   },
   node: {

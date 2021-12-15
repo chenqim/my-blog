@@ -1,21 +1,19 @@
 <template>
-  <div class="m-container">
-    <div class="m-content mt20">
-      <el-row :gutter="62">
-        <el-col :span="8" v-for="(item, index) in images" :key="index" style="margin-bottom: 40px;">
-          <!-- <div :id="`img-div-${index}`">
-            <img :src="item.src" class="img" alt="">
-          </div> -->
-          <div class="hovereffect" style="border-radius: 2px; cursor: pointer;">
-            <img class="img-responsive img" :src="item.src" alt="">
-            <div class="overlay">
-              <h2>Hover effect 1</h2>
-              <a class="info" href="#">link here</a>
-            </div>
+  <div>
+    <el-row :gutter="24">
+      <el-col :span="8" v-for="(item, index) in images" :key="index" style="margin-bottom: 40px;">
+        <!-- <div :id="`img-div-${index}`">
+          <img :src="item.src" class="img" alt="">
+        </div> -->
+        <div class="hovereffect" style="border-radius: 2px; cursor: pointer;">
+          <img class="img-responsive img" :src="item.src" alt="">
+          <div class="overlay">
+            <h2>Hover effect 1</h2>
+            <a class="info" href="#">link here</a>
           </div>
-        </el-col>
-      </el-row>
-    </div>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
